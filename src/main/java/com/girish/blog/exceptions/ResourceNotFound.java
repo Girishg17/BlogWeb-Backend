@@ -2,6 +2,7 @@ package com.girish.blog.exceptions;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 @Getter
 @Setter
