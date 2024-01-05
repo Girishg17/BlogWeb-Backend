@@ -28,10 +28,14 @@ public class UserServiceImpl implements Userservice {
     public UserDto updateUser(UserDto user, Integer userId) {
         User userOfId =this.userp.findById(userId)
                 .orElseThrow(()->new ResourceNotFound("user","Id",userId));
-        userOfId.setName(user.getName());
-        userOfId.setEmail(user.getEmail());
-        userOfId.setPassword(user.getPassword());
-        userOfId.setAbout(user.getAbout());
+        if(user.getName()!=null)
+            userOfId.setName(user.getName());
+        if(user.getEmail()!=null)
+            userOfId.setEmail(user.getEmail());
+        if(user.getPassword()!=null)
+            userOfId.setPassword(user.getPassword());
+        if(user.getAbout()!=null)
+            userOfId.setAbout(user.getAbout());
         User updatedUser=this.userp.save(userOfId);
         return this.UsertoDto(updatedUser);
 
