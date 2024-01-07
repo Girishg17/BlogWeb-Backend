@@ -1,9 +1,14 @@
 package com.girish.blog.entities;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
-
+@Getter
+@Setter
+@NoArgsConstructor
 @Entity
 @Table(name="Posts")
 public class PostEntity {
