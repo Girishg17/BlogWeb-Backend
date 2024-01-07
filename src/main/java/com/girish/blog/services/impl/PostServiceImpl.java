@@ -5,6 +5,7 @@ import com.girish.blog.entities.PostEntity;
 import com.girish.blog.entities.User;
 import com.girish.blog.exceptions.ResourceNotFound;
 import com.girish.blog.payloads.PostDto;
+import com.girish.blog.payloads.PostResponse;
 import com.girish.blog.repositories.CategoryRepo;
 import com.girish.blog.repositories.PostRepo;
 import com.girish.blog.repositories.Userrepo;
@@ -74,13 +75,20 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPost(Integer pagNumber,Integer pagesize) {
+    public PostResponse getAllPost(Integer pagNumber, Integer pagesize) {
 
         Pageable p= PageRequest.of(pagNumber,pagesize);
         Page<PostEntity> pagePost=this.postRepo.findAll(p);
         List<PostEntity>content=pagePost.getContent();
         List<PostDto>all=content.stream().map((post)->this.modelMapper.map(post,PostDto.class)).collect(Collectors.toList());
-        return  all;
+        PostResponse postResponse=new PostResponse();
+        postResponse.setContent(all);
+        postResponse.setPageNumber(pagePost.getNumber());
+        postResponse.setPageSize(pagePost.getSize());
+        postResponse.setTotalElement(pagePost.getTotalElements());
+        postResponse.setTotalPages(pagePost.getTotalPages());
+        postResponse.setLastPage(pagePost.isLast());
+        return  postResponse;
     }
 
     @Override

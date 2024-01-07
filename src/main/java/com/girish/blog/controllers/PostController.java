@@ -3,6 +3,7 @@ package com.girish.blog.controllers;
 import com.girish.blog.entities.PostEntity;
 import com.girish.blog.payloads.ApiResponse;
 import com.girish.blog.payloads.PostDto;
+import com.girish.blog.payloads.PostResponse;
 import com.girish.blog.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,9 +37,9 @@ public class PostController {
         return new  ResponseEntity<>(ans,HttpStatus.OK);
     }
     @GetMapping("/posts")
-    public  ResponseEntity<List<PostDto>>getAllpost(@RequestParam(value = "pageNumber",defaultValue = "1",required = false)Integer pageNum,@RequestParam(value = "pageSize",defaultValue = "2",required = false)Integer pageSize){
-        List<PostDto>allpost=this.postService.getAllPost(pageNum,pageSize);
-        return new ResponseEntity<List<PostDto>>(allpost,HttpStatus.OK);
+    public  ResponseEntity<PostResponse>getAllpost(@RequestParam(value = "pageNumber",defaultValue = "0",required = false)Integer pageNum,@RequestParam(value = "pageSize",defaultValue = "2",required = false)Integer pageSize){
+        PostResponse ans =this.postService.getAllPost(pageNum,pageSize);
+        return new ResponseEntity<PostResponse>(ans,HttpStatus.OK);
     }
 
     @GetMapping("/posts/{postId}")

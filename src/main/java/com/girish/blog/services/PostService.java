@@ -2,6 +2,7 @@ package com.girish.blog.services;
 
 import com.girish.blog.entities.PostEntity;
 import com.girish.blog.payloads.PostDto;
+import com.girish.blog.payloads.PostResponse;
 
 import java.util.List;
 
@@ -12,7 +13,7 @@ public interface PostService {
 
     void deletePost(Integer postId);
 
-    List<PostDto>getAllPost(Integer pageno,Integer pagesize);
+    PostResponse getAllPost(Integer pageno, Integer pagesize);
 
     PostDto getPostById(Integer postId);
 
