@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -71,9 +74,12 @@ public class PostServiceImpl implements PostService {
     }
 
     @Override
-    public List<PostDto> getAllPost() {
-        List<PostEntity>allpost=this.postRepo.findAll();
-        List<PostDto>all=allpost.stream().map((post)->this.modelMapper.map(post,PostDto.class)).collect(Collectors.toList());
+    public List<PostDto> getAllPost(Integer pagNumber,Integer pagesize) {
+
+        Pageable p= PageRequest.of(pagNumber,pagesize);
+        Page<PostEntity> pagePost=this.postRepo.findAll(p);
+        List<PostEntity>content=pagePost.getContent();
+        List<PostDto>all=content.stream().map((post)->this.modelMapper.map(post,PostDto.class)).collect(Collectors.toList());
         return  all;
     }
 
