@@ -3,7 +3,9 @@ package com.girish.blog.payloads;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+
 
 @NoArgsConstructor
 @Getter
@@ -24,4 +26,11 @@ public class UserDto {
     @NotEmpty
     private String about;
 
+    public UserDto(String name, String email, String password, String about) {
+        this.name=name;
+        this.email=email;
+        this.password=password;
+        this.about=about;
+
+    }
 }
