@@ -42,7 +42,7 @@ class UserControllerTests {
         // Mock UserDto
         UserDto userDto = new UserDto();
         userDto.setId(1);
-        userDto.setName("John Doe");
+        userDto.setName("Joh Doe");
         userDto.setEmail("john.doe@example.com");
         userDto.setPassword("84923");
         userDto.setAbout("luchbi");
