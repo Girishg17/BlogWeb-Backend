@@ -98,6 +98,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>blogweb</finalName>
+
 	</build>
 
 </project>

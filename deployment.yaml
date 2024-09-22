@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blogweb
+  labels:
+    app: blogweb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blogweb
+  template:
+    metadata:
+      labels:
+        app: blogweb
+    spec:
+      containers:
+        - name: blogweb
+          image: pes1ug20cs552/blogweb:v1.0
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: blogweb-service
+spec:
+  selector:
+    app: blogweb
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: LoadBalancer
